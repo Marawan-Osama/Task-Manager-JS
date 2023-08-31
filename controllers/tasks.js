@@ -1,5 +1,7 @@
 const Task = require('../models/task')
 
+
+//Controller to Get all tasks
 const getAllTasks = async (req,res)=>{
     try {
         const tasks = await Task.find({})
@@ -9,6 +11,7 @@ const getAllTasks = async (req,res)=>{
     }
 }
 
+//Controller to create a task
 const createTask = async (req,res)=>{
     try {
         const task = await Task.create(req.body)
@@ -19,6 +22,7 @@ const createTask = async (req,res)=>{
     
 }
 
+//Controller to get a particular task
 const getTask = async (req,res)=>{
     try {
         const task = await Task.findOne({_id: req.params.id})
