@@ -3,16 +3,17 @@ const app = express();
 const tasks = require('./routes/tasks');
 const connectDB = require('./db/connect')
 require('dotenv').config()
+const notFound = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
+//middleware for static files
+app.use(express.static('./public'))
 //middleware for JSON
 app.use(express.json())
-
-// routes
-app.get('/hello',(req,res)=>{
-    res.send('Hello World')
-})
-
 app.use('/api/v1/tasks', tasks)
+app.use(notFound)
+app.use(errorHandlerMiddleware)
+
 //Task manager will have the following routes:
 // app.get('/api/v1/tasks') --> get all tasks
 //app.post('/api/v1/tasks') --> create a new task
